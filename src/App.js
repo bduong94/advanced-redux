@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
+import Notification from "./components/UI/Notification";
 import { uiActions } from "./store";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
 
   const show = useSelector((state) => state.ui.show);
   const cart = useSelector((state) => state.cart);
+  const notification = useSelector((state) => state.ui.notification);
 
   useEffect(() => {
     const sendCartData = async () => {
@@ -54,10 +56,19 @@ function App() {
   }, [cart, dispatch]);
 
   return (
-    <Layout>
-      {show && <Cart />}
-      <Products />
-    </Layout>
+    <>
+      {notifcation && (
+        <Notification
+          status={notification.status}
+          title={notification.title}
+          message={notification.message}
+        />
+      )}
+      <Layout>
+        {show && <Cart />}
+        <Products />
+      </Layout>
+    </>
   );
 }
 
