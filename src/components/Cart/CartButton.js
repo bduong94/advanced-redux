@@ -1,12 +1,12 @@
 import classes from "./CartButton.module.css";
-import { cartActions } from "../../store";
+import { uiActions } from "../../store";
 import { useDispatch } from "react-redux/es/exports";
 
 const CartButton = (props) => {
   const dispatch = useDispatch();
 
   const cartToggleHandler = () => {
-    dispatch(cartActions.showCart());
+    dispatch(uiActions.showCart());
   };
 
   return (
