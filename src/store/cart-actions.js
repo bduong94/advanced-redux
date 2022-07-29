@@ -1,5 +1,7 @@
 import { uiActions } from ".";
 
+import { cartActions } from ".";
+
 export const fetchCartData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
@@ -17,14 +19,8 @@ export const fetchCartData = () => {
     };
 
     try {
-      await fetchData();
-      dispatch(
-        uiActions.showNotification({
-          status: "success",
-          title: "Success!",
-          message: "Sent cart data successfully!",
-        })
-      );
+      const cartData = await fetchData();
+      dispatch(cartActions.replaceCart(cartData));
     } catch (error) {
       dispatch(
         uiActions.showNotification({
